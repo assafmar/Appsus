@@ -23,7 +23,7 @@ function getEmails(){
 function getEmailById(emailId){
   return getEmails().then(emails => {
     const email = emails.find(email => emailId === email.id);
-    return book;
+    return email;
   });
 }
 
@@ -69,10 +69,10 @@ function changeEmailIsRead(email,value){
   emails[idx].isRead=value;
 }
 
-function changeEmailCategory(email,value){ // {inbox:true, sent:true}
+function changeEmailCategory(email,value, key){ // {inbox:true, sent:true}
  console.log('Changing email Category to:', value)
   var idx = email.indexOf(email)
-  emails[idx].category=value;
+  emails[idx].category.key = value;
 }
 
 
