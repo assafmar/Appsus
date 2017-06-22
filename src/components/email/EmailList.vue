@@ -1,6 +1,6 @@
 <template>  
  <section v-if="emails" class="email-list">
-     <email-preview v-for="currEmail in emails" :key="currEmail.id" :email="currEmail"></email-preview>
+     <email-preview @selectedEmail="passingSelectedMail"v-for="currEmail in emails" :key="currEmail.id" :email="currEmail"></email-preview>
   </section>
 </template>
 
@@ -20,6 +20,7 @@ export default {
     emailService.getEmails().then(mails => {
       console.log('promise returned to List', this.mails)
       this.emails = mails
+      this.$emit('defaultEmail', this.emails[0])
     console.log('after', this.emails)});
       
   },
@@ -48,7 +49,9 @@ export default {
   },
 
   methods:{
-   
+   passingSelectedMail(mailToSelect){
+    this.$emit('selectedEmail',mailToSelect);
+   }
   }
 }
 

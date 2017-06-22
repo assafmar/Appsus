@@ -50,12 +50,13 @@ function getNext(email) { /// TBD later (low priority)
 }
 
 function sendEmail(email){
-    var emaiWithControls = email;
+    var emailWithControls = email;
     emailWithControls.id=getUniqueId();;
     emailWithControls.date = Date.now();
     emailWithControls.isRead = false;
     emailWithControls.category = {sent:true,inbox:true};
     emails.push(emailWithControls);
+    console.log('saved');
   }
 
 function getUniqueId(){
