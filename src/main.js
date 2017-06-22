@@ -5,6 +5,8 @@ import App from './App'
 import router from './router'
 import ElementUI from 'element-ui'
 import locale from 'element-ui/lib/locale/lang/en'
+//import moment from 'moment'
+
 
 Vue.use(ElementUI, { locale })
 

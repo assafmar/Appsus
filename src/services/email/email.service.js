@@ -1,17 +1,19 @@
+import emailData from './emailData.service';
 
-const emails = [];   //-------> DB
+let emails = [];   //-------> DB
 
 
-
-function getEmails(){
-  return new Promise(resolve => {
+//function getEmails(){
+  const getEmails = () => {
+return new Promise(resolve => {
     // simple caching mechanism
     if (emails.length) {
       resolve(emails);
     }
     else {
       setTimeout(() => {
-        emails = emailData.service.fetchEmails();
+        emails = emailData.fetchEmails();
+        console.log("get emails fetch from emailDate:",emails);
         resolve(emails);
       }, 500);
     }
@@ -23,7 +25,7 @@ function getEmails(){
 function getEmailById(emailId){
   return getEmails().then(emails => {
     const email = emails.find(email => emailId === email.id);
-    return book;
+    return email;
   });
 }
 
@@ -69,10 +71,10 @@ function changeEmailIsRead(email,value){
   emails[idx].isRead=value;
 }
 
-function changeEmailCategory(email,value){ // {inbox:true, sent:true}
+function changeEmailCategory(email,key,value){ // {inbox:true, sent:true}
  console.log('Changing email Category to:', value)
   var idx = email.indexOf(email)
-  emails[idx].category=value;
+  emails[idx].category.key=value;
 }
 
 
