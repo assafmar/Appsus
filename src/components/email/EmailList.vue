@@ -1,6 +1,6 @@
 <template>  
  <section v-if="emails" class="email-list">
-     <email-preview v-for="currEmail in emails" :email="currEmail"></email-preview>
+     <email-preview v-for="currEmail in emails" :key="currEmail.id" :email="currEmail"></email-preview>
   </section>
 </template>
 

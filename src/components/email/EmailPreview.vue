@@ -17,8 +17,8 @@ export default {
     props: ['email'],
     methods: {
         seeDetails() {
-            console.log('Request email details *************', );
-            this.$emit('email-details');
+            console.log('EMIT selected email',this.currEmail );
+            this.$emit('selectedEmail',email);
         },
 
         moment: function () {
@@ -28,6 +28,7 @@ export default {
     },
     data() {
              return{
+                 currEmail:email
         // moment:moments,
     }
 
