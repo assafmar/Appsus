@@ -53,12 +53,6 @@ export default {
 }
 
 
-
-
-
-
-
-
 </script>
 
 
@@ -70,6 +64,8 @@ export default {
     width:33%;
     height: 100%;
     background: #E5E9F2;
+
+
 }
 
 
