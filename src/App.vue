@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <div class="nav-bar"></div>
     <router-view></router-view>
   </div>
 </template>
@@ -18,6 +18,10 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+.nav-bar{
+  width: 100%;
+  height: 80px;
+  background: blue;
 }
 </style>
