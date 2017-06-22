@@ -1,8 +1,10 @@
 <template>  
+<section class="email-preview">
+    
 
 
 
-
+</section>
 </template>
 
 
@@ -19,7 +21,13 @@
 
 
 <style lang="">
+.email-preview{
+    background:#D3DCE6;
+    height: 80px;
+    width:100%;
+    margin-bottom: 5px ;
 
+}
 
 
 

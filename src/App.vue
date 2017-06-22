@@ -22,6 +22,6 @@ export default {
 .nav-bar{
   width: 100%;
   height: 80px;
-  background: blue;
+  background: #475669;
 }
 </style>

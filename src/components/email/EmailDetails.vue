@@ -1,8 +1,10 @@
 <template>  
+<section class="email-details">
 
 
 
 
+</section>
 </template>
 
 
@@ -19,7 +21,10 @@
 
 
 <style lang="">
-
+.email-details{
+background: #C0CCDA;
+width: 100%;
+}
 
 
 
