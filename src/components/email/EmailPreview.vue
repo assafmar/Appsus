@@ -1,9 +1,8 @@
 <template>
     <section class="email-preview" @click.stop="seeDetails">
         <div class="preview-title">
-            <div class="email-from">From:{{email.from}}</div>
+            <div class="email-from">From: {{email.from}}</div>
             <div class="email-date">{{ (Date(email.date)).toString().substr(4,17)}}</div>
-            <!--<p>{{ (Date(email.date))}}</p>-->
         </div>
         <p class="email-subject">{{email.subject}}</p>
     
@@ -11,7 +10,6 @@
 </template>
 
 <script>
-import moments from 'moment'
 export default {
     name: 'email-preview',
     props: ['email'],
@@ -20,11 +18,6 @@ export default {
             console.log('EMIT selected email', this.email);
             this.$emit('selectedEmail', this.email);
         },
-
-        moment: function () {
-            return moments();
-        }
-
     },
     data() {
         return {
@@ -46,8 +39,8 @@ export default {
     background: #D3DCE6;
     /*height: 80px;*/
     border-radius: 3px;
-    width: 100%;
-    margin-bottom: 8px;
+    /*width: 100%;*/
+    margin-bottom: 1px;
     display: flex;
     flex-direction:column;
     padding: 0px 10px;
@@ -58,17 +51,18 @@ export default {
     display:flex;
     justify-content:space-between;
     align-items:center;
+    margin-top: 0.5em;
+    flex-wrap: wrap;
 }
 
 .email-from{
 font-size: 1em;    
 }
 .email-date{
-font-size: 1em;    
+font-size: 0.5em;    
 }
 .email-subject{
 font-size: 1em;    
 }
-
 
 </style>

@@ -1,10 +1,10 @@
 <template>  
 <section class="email-app">
-    <email-list>EmailList</email-list>
+    <email-list @defaultEmail=passingSelectedMail @selectedEmail="passingSelectedMail">EmailList</email-list>
         <input type="checkbox" v-model ="isComposing"></input> 
         <div class="cont">
         <transition name="fade">
-            <email-details v-if="!isComposing"></email-details>
+            <email-details v-if="!isComposing" :email="selectedMail"></email-details>
         </transition>
         <transition name="fade">
             <email-compose v-if="isComposing"
@@ -24,6 +24,7 @@
 import EmailList from './EmailList.vue';
 import EmailDetails from './EmailDetails.vue';
 import EmailCompose from './EmailCompose.vue';
+import emailService from '../../services/email/email.service';
 
 
 export default {
@@ -36,24 +37,31 @@ export default {
   data(){
     return{
         isComposing: false,
-        emailToSend: null
+        emailToSend: null,
+        selectedMail: null
 
     }
   },
   methods:{
    sendEmail(mailToSend){
        this.emailToSend = mailToSend;
-    console.log(mailToSend, "BOBOB")
+       emailService.sendEmail(this.emailToSend)
+       this.showDetails()
    },
    showDetails(){
        this.isComposing = !this.isComposing
-       console.log('Cancel')
+   },
+   passingSelectedMail(mailToSelect){
+       if(!this.selectedMail){
+    this.selectedMail = mailToSelect
+    }else{
+    this.selectedMail = mailToSend;
    }
-  }
+  },
 }
 
 
-
+}
 
 </script>
 

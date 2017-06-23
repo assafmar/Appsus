@@ -1,6 +1,6 @@
 <template>  
 <section class="email-details">
-
+{{email}}
 
 
 
@@ -9,6 +9,25 @@
 
 
 <script>
+
+export default {
+    name: 'email-details',
+    props: ['email'],
+    methods: {
+        showDetails() {
+           
+        },
+        },
+
+    
+    data() {
+             return{
+
+    }
+
+}
+
+}
     
 
 
