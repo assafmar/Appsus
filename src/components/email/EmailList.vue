@@ -1,5 +1,6 @@
 <template>  
  <section v-if="emails" class="email-list">
+ <el-button class="list-compose" @click=startComposing type="primary" icon="edit">Compose</el-button>
      <email-preview @selectedEmail="passingSelectedMail"v-for="currEmail in emails" :key="currEmail.id" :email="currEmail"></email-preview>
   </section>
 </template>
@@ -43,14 +44,15 @@ export default {
       var emails = this.emails;
       return emails;
     },
-    byby() {
-      console.log('arives emails',this.emails)
-    }
+    
   },
 
   methods:{
    passingSelectedMail(mailToSelect){
     this.$emit('selectedEmail',mailToSelect);
+   },
+   startComposing(){
+     this.$emit('startComposing')
    }
   }
 }
@@ -73,6 +75,13 @@ export default {
     width:33%;
     height: 100%;
     background: #E5E9F2;
+    padding: 0 10px 0 5px;
+}
+
+.list-compose{
+  width: 100%;
+  margin: 5px 0;
+  box-shadow: 4px 0px 11px -1px rgba(173,171,173,1);
 }
 
 

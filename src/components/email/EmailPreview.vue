@@ -3,7 +3,8 @@
     
         <p>{{email.from}}</p>
         <!--<p>{{Date(email.date)}}</p>-->
-        <p>{{ (Date(email.date)).toString().substr(8,13)}}</p>
+       <!-- <p>{{ (Date(email.date)).toString().substr(8,13)}}</p>-->
+       <p>{{moment(email.date).format('lll')}}</p>
         <p>{{email.subject}}</p>
 
 
@@ -11,7 +12,6 @@
 </template>
 
 <script>
-import moments from 'moment'
 export default {
     name: 'email-preview',
     props: ['email'],
@@ -21,9 +21,6 @@ export default {
             this.$emit('selectedEmail',this.email);
         },
 
-        moment: function () {
-            return moments();
-        }
 
     },
     data() {

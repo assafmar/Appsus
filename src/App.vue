@@ -1,13 +1,40 @@
 <template>
   <div id="app">
-    <div class="nav-bar"></div>
-    <router-view></router-view>
+    <el-menu :default-active="activeIndex" class="el-menu" mode="horizontal" @select="handleSelect">
+    <el-menu-item index="/">
+    <el-badge :value="unreadEmails" class="item">
+    Email
+    <i class="el-icon-message"></i>
+</el-badge>
+    </el-menu-item>
+    <el-menu-item index="/map">Maps</el-menu-item>
+</el-menu>
+
+<transition name="fade">
+    <router-view @unreadMails="updateCount"></router-view>
+</transition>
+
   </div>
 </template>
 
 <script>
 export default {
-  name: 'app'
+  name: 'app',
+  data(){
+    return{
+         activeIndex: '/',
+         activeIndex2: '/map',
+         unreadEmails: 0
+    }
+  },
+   methods: {
+      handleSelect(key, keyPath) {
+         this.$router.push(key)
+      },
+      updateCount(count){
+        this.unreadEmails = count;
+      }
+    }
 }
 </script>
 
@@ -19,9 +46,22 @@ html,body{
 #app {
   color: #2c3e50;
 }
-.nav-bar{
-  width: 100%;
-  height: 80px;
-  background: #475669;
+
+.fade-enter-active, .fade-leave-active {
+  transition-property: opacity;
+  transition-duration: .25s;
 }
+
+.fade-enter-active {
+  transition-delay: .25s;
+}
+
+.fade-enter, .fade-leave-active {
+  opacity: 0
+}
+
+sup.el-badge__content.is-fixed{
+  top: 20px !important;
+}
+
 </style>
