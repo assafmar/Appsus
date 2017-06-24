@@ -46,7 +46,8 @@ import { Notification } from 'element-ui';
                 from:this.from,
                 subject:this.subject,
                 text:this.text,
-                isRead: false
+                isRead: false,
+                category:{sent:false,inbox:true}
             }
         },
         clear(){

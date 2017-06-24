@@ -86,6 +86,9 @@ const getUnreadEmailCount = () => {
   }, 0);
 }
 
+function mailsToShow(){
+    let filtered
+}
 
 export default {
     getEmails,

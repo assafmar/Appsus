@@ -1,9 +1,17 @@
 <template>
   <section v-if="emails" class="email-list">
     <el-button class="list-compose" @click="startComposing" type="primary" icon="edit">Compose</el-button>
-    <email-directory></email-directory>
     <email-search @searchQueryB="setQuery" @radioSelectB="setRadio"></email-search>
+    <el-tabs type="card" @tab-click="handleClick">
+      <el-tab-pane label="inbox" value="1">
     <email-preview @selectedEmail="passingSelectedMail" v-for="currEmail in emailsToDisplay" :key="currEmail.id" :email="currEmail" :class="{ 'is-not-read': !currEmail.isRead }"></email-preview>
+        <!--<email-preview @selectedEmail="passingSelectedMail" @showEmail="showEmail" v-for="currEmail in emailsToDisplay" :key="currEmail.id" :email="currEmail">-->
+        </email-preview>
+      </el-tab-pane>
+      <el-tab-pane label="sent" value="2">
+      </el-tab-pane>
+    </el-tabs>
+
   </section>
 </template>
 
@@ -12,7 +20,6 @@
 
 import EmailPreview from './EmailPreview.vue';
 import EmailSearch from './EmailSearch.vue';
-import EmailDirectory from './EmailDirectory.vue';
 import emailService from '../../services/email/email.service';
 
 export default {
@@ -21,7 +28,6 @@ export default {
   components: {
     EmailPreview,
     EmailSearch,
-    EmailDirectory,
   },
   created() {
     emailService.getEmails().then(mails => {
@@ -38,7 +44,8 @@ export default {
       selectedEmail: null,
       isCreateMode: false,
       searchQuery: '',
-      radioSelect: 'All'
+      radioSelect: 'All',
+      key: null
     }
   },
 
@@ -81,9 +88,34 @@ export default {
       console.log('setRadio', radioSelect);
       this.radioSelect = radioSelect;
       console.log('setRadio', this.radioSelect);
+    },
 
+    handleClick(tab, event) {//tabs
+      this.emailsToShow(tab._props.label)
+      console.log(tab._props.label);
+    },
+    emailsToShow(key) {
+      console.log('Enter in to loop', key)
+      var emailsToShow;
+      if (key === 'inbox') {
+        emailsToShow = this.emails.filter(email => {
+          console.log('inLoop', email.category.inbox)
+          return email.category.inbox;
+        });
+      } else if (key === 'sent') {
+        emailsToShow = this.emails.filter(email => {
+          console.log('inLoop', email.category.key)
+          return email.category.key;
+        });
+      }
+      console.log('end loop', emailsToShow)
+      // this.emails = emailsToShow;
+
+    },
+    showEmail() {
+      this.$emit('showEmail')
     }
-  },
+  }
 }
 
 
@@ -93,21 +125,36 @@ export default {
 
 
 <style lang="">
+
 .email-list {
-  width: 33%;
-  height: 100%;
-  background: #E5E9F2;
-  border: 4px solid darkgray;
-  padding: 0 10px 0 5px;
+    box-sizing: border-box;
+    width: 33%;
+    height: 100%;
+    background: #eef1f6;
+    padding: 0 10px 0 5px;
+    transition: all .5s;
+  }
+
+  .list-compose {
+    width: 100%;
+    margin: 5px 0;
+    box-shadow: 4px 0px 11px -1px rgba(173, 171, 173, 1);
+  }
+
+  .is-not-read {
+    font-weight: bold;
+  }
+ 
+
+.el-tabs__content {
+  overflow: visible !important;
 }
 
-.list-compose {
-  width: 100%;
-  margin: 5px 0;
-  box-shadow: 4px 0px 11px -1px rgba(173, 171, 173, 1);
+@media (max-width: 711px) {
+  .email-list {
+    width: 100%;
+    height: 100%;
+  }
 }
 
-.is-not-read {
-  font-weight: bold;
-}
 </style>

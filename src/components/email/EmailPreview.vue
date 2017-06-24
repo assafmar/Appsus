@@ -15,20 +15,18 @@ export default {
     props: ['email'],
     methods: {
         seeDetails() {
-            console.log('EMIT selected email', this.email);
-            this.$emit('selectedEmail', this.email);
+            this.$emit('selectedEmail',this.email);
+            this.$emit('showEmail');
         },
     },
     data() {
-        return {
-    
+        return{
+            isSelected:false,
         }
-
+    },
+    created(){
     }
-
 }
-
-
 </script>
 
 
@@ -44,6 +42,11 @@ export default {
     display: flex;
     flex-direction:column;
     padding: 0px 10px;
+     border-radius: 3px;
+    cursor: pointer;
+    box-shadow: 4px 0px 7px -1px rgba(173,171,173,1);
+    transition: all .3s;
+     box-sizing: border-box;
 
 }
 
@@ -63,6 +66,14 @@ font-size: 0.5em;
 }
 .email-subject{
 font-size: 1em;    
+  
+   
+}
+.email-preview:hover {
+    background: #C0CCDA;
+    box-shadow: 4px 0px 7px -1px #99A9BF;
+
+
 }
 
 </style>
