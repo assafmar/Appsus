@@ -54,7 +54,7 @@ function sendEmail(email){
     var emailWithControls = email;
     emailWithControls.id=getUniqueId();;
     emailWithControls.date = Date.now();
-    // emailWithControls.isRead = false;
+    emailWithControls.isRead = false; // LESSON: wasnt reactive until we added it in the "details" section 
     emailWithControls.category = {sent:true,inbox:true};
     emails.unshift(emailWithControls);
     console.log('saved');
