@@ -76,26 +76,32 @@ export default {
      this.$emit('startComposing')
    },
       handleClick(tab, event) {
-        
+        this.emailsToShow(tab._props.label)
         console.log(tab._props.label);
       },
       emailsToShow(key) {
-            let emailToshow = this.emails.filter(email => {
-                 if(email.category.sent){
-                  return email.category.sent
-                }
-              console.log(emailToshow)
-              this.emails=emailToshow
+        console.log('Enter in to loop', key)
+        var emailsToShow;
+        if(key==='inbox'){
+          emailsToShow = this.emails.filter(email => {
+              console.log('inLoop', email.category.inbox)
+               return   email.category.inbox;
             });
+        }else if(key==='sent'){
+             emailsToShow = this.emails.filter(email => {
+              console.log('inLoop', email.category.key)
+               return   email.category.key;
+            });
+        }
+              console.log('end loop',emailsToShow)
+              // this.emails = emailsToShow;
+              
   },
   showEmail(){
     this.$emit('showEmail')
   }
-
 }
 }
-
-
 
 
 

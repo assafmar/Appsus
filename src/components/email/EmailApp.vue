@@ -1,7 +1,7 @@
 <template>  
 <section class="email-app">
  <transition name="slide-fade">
-    <email-list class="email-list" v-if="!isMobile||!showEmail" v-show="!isComposing"
+    <email-list class="email-list" v-if="!isMobile||(!showEmail&&!isComposing&&isMobile)"
         @defaultEmail="passingSelectedMail"
         @selectedEmail="passingSelectedMail"
         @startComposing="showDetails"
