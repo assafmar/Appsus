@@ -1,24 +1,29 @@
 <template>  
 <section class="email-app">
-    <email-list
+ <transition name="slide-fade">
+    <email-list class="email-list" v-if="!isMobile||!showEmail" v-show="!isComposing"
         @defaultEmail="passingSelectedMail"
         @selectedEmail="passingSelectedMail"
-        @startComposing="startComposing">
+        @startComposing="showDetails"
+        @showEmail="showMail"
+        :isMobile="isMobile">
     </email-list>
-    <div class="cont">
+    </transition>
+    <transition name="slide-fade">
+    <div class="cont" v-if="isComposing||showEmail||!isMobile">
         <transition name="slide-fade">
-            <email-details
+            <email-details v-if="!isComposing&&nextMail"
+                @showEmail="showMail"
                 @emailDelete="emailDelete"
                 @isReadChange="isReadChange"
-                v-if="!isComposing&&nextMail"
                 :email="selectedMail">
             </email-details>
             </transition>
             <transition name="slide-fade">
-              <email-details
+              <email-details v-if="!isComposing&&!nextMail"
+                @showEmail="showMail"   
                 @emailDelete="emailDelete"
                 @isReadChange="isReadChange"
-                v-if="!isComposing&&!nextMail"
                 :email="selectedMail">
             </email-details>
          </transition>
@@ -29,6 +34,7 @@
             </email-compose>
          </transition>
     </div>
+    </transition>
 
 
 
@@ -51,7 +57,8 @@ export default {
       EmailCompose,
     },
     created(){
-       this.updateUnreadEmailCounter();
+        this.getWindowWidth()
+        this.updateUnreadEmailCounter();
     },
     data(){
     return{
@@ -59,24 +66,26 @@ export default {
         emailToSend: null,
         selectedMail: null,
         unreadCount: 0,
-        nextMail: true
+        isMobile: false,
+        windowWidth: 0,
+        nextMail: false,
+        showEmail: false
 
     }
   },
     methods:{
-        sendEmail(mailToSend){
+
+    sendEmail(mailToSend){
         emailService.sendEmail(mailToSend);
         this.showDetails();
         this.updateUnreadEmailCounter();
     },
-    startComposing(){
-        this.isComposing = !this.isComposing;
-        console.log('Composing');
-    },
     showDetails(){
         this.isComposing = !this.isComposing;
+        console.log('composing',this.isComposing,'showing email',this.showEmail,'isMobile',this.isMobile)
    },
      passingSelectedMail(mailToSelect){
+        this.isComposing = false;
         this.nextMail= !this.nextMail;
         this.selectedMail = mailToSelect; 
     },
@@ -97,11 +106,29 @@ export default {
     isReadChange(val, mail){
         this.updateUnreadEmailCounter()
         emailService.changeEmailIsRead(mail,val)
+    },
+     getWindowWidth(event) {
+         if(this.windowWidth < 710){
+             this.isMobile = true;
+         }else{
+             this.isMobile = false;
+         }
+        this.windowWidth = document.documentElement.clientWidth;
+      },
+      showMail(){
+          this.showEmail = !this.showEmail;
+          console.log('showing', this.showEmail)
+      }
+},
+mounted() {
+    this.$nextTick(function() {
+      window.addEventListener('resize', this.getWindowWidth);
+      //Init
+      this.getWindowWidth()
+    })
 
-       
-        
-    }
-}
+  },
+
 
 
 }
@@ -118,6 +145,7 @@ height: 100%;
 width: 100%;
 background: #FFFFFF;
 display: flex;
+transition: all .5s;
 }
 
 .slide-fade-enter-active {
@@ -133,10 +161,17 @@ display: flex;
 }
 
 .cont{
-
     width: 100%;
     display: block;
    height: 100vh;
+}
+@media (max-width: 710px) {
+  .email-list{
+    width: 100%;
+    display: block;
+    height: 100vh;
+  }
+
 }
 
 

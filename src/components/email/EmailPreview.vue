@@ -17,19 +17,19 @@ export default {
     props: ['email'],
     methods: {
         seeDetails() {
-            console.log('EMIT selected email!!!!!!!!!!',this.email);
             this.$emit('selectedEmail',this.email);
+            this.$emit('showEmail');
         },
 
 
     },
     data() {
-             return{
+        return{
+            isSelected:false,
+       
+        }
 
-        // moment:moments,
-    }
-
-},
+    },
     created(){
 
     }
@@ -45,8 +45,18 @@ export default {
 <style lang="">
 .email-preview {
     background: #D3DCE6;
-    /*height: 80px;*/
+    box-sizing: border-box;
     width: 100%;
-    margin-bottom: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+    box-shadow: 4px 0px 7px -1px rgba(173,171,173,1);
+    transition: all .3s;
 }
+.email-preview:hover {
+    background: #C0CCDA;
+    box-shadow: 4px 0px 7px -1px #99A9BF;
+
+
+}
+
 </style>

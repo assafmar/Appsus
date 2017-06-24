@@ -56,7 +56,7 @@ function sendEmail(email){
     emailWithControls.date = Date.now();
     // emailWithControls.isRead = false;
     emailWithControls.BUBU = false;
-    emailWithControls.category = {sent:true,inbox:true};
+    // emailWithControls.category = {sent:true,inbox:true};
     emails.unshift(emailWithControls);
     console.log('saved');
   }
@@ -87,6 +87,9 @@ const getUnreadEmailCount = () => {
   }, 0);
 }
 
+function mailsToShow(){
+    let filtered
+}
 
 export default {
     getEmails,
