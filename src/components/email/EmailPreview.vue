@@ -2,7 +2,7 @@
     <section class="email-preview" @click.stop="seeDetails">
         <div class="preview-title">
             <div class="email-from">From: {{email.from}}</div>
-            <div class="email-date">{{ (Date(email.date)).toString().substr(4,17)}}</div>
+            <div class="email-date">{{moment(email.date).format('lll')}}</div>
         </div>
         <p class="email-subject">{{email.subject}}</p>
     

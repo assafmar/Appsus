@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Hello from '@/components/Hello'
 import EmailApp from '@/components/email/EmailApp'
+import MapApp from '@/components/maps/MapApp'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 
@@ -14,6 +15,11 @@ export default new Router({
       path: '/',
       name: 'EmailApp',
       component: EmailApp
+    },
+    {
+      path: '/map',
+      name: 'MapApp',
+      component: MapApp
     }
   ]
 })

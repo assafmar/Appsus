@@ -38,8 +38,9 @@ function deleteEmail(email){
     // (1) delete just from inbox or just from sent 
     // (2)update in server and then bust cache
   console.log('Deleting the Email:', email)
-  var idx = email.indexOf(email)
+  var idx = emails.indexOf(email)
   emails.splice(idx, 1);
+  console.log(emails)
 }
 
 function getNext(email) { /// TBD later (low priority)
@@ -53,9 +54,9 @@ function sendEmail(email){
     var emailWithControls = email;
     emailWithControls.id=getUniqueId();;
     emailWithControls.date = Date.now();
-    emailWithControls.isRead = false;
+    // emailWithControls.isRead = false;
     emailWithControls.category = {sent:true,inbox:true};
-    emails.push(emailWithControls);
+    emails.unshift(emailWithControls);
     console.log('saved');
   }
 
@@ -68,7 +69,7 @@ function getUniqueId(){
 
 function changeEmailIsRead(email,value){
  console.log('Changing email isRead to:', value)
-  var idx = email.indexOf(email)
+  var idx = emails.indexOf(email)
   emails[idx].isRead=value;
 }
 
@@ -78,6 +79,13 @@ function changeEmailCategory(email,key,value){ // {inbox:true, sent:true}
   emails[idx].category.key=value;
 }
 
+const getUnreadEmailCount = () => {
+  return emails.reduce(( acc, email ) => {
+    if(!email.isRead)acc++;
+    return acc;
+  }, 0);
+}
+
 
 export default {
     getEmails,
@@ -85,5 +93,6 @@ export default {
     deleteEmail,
     sendEmail,
     changeEmailIsRead,
-    changeEmailCategory
+    changeEmailCategory,
+    getUnreadEmailCount
 }
