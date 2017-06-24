@@ -67,7 +67,7 @@ var google;
 <style lang="">
 .map-canvas{
     background: #EFF2F7;
-    width: 100%;
+    /*width: 60%;*/
     height: 100vh;
 }
 #map{
