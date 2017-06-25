@@ -9,7 +9,7 @@
             <div class="cont" v-if="isComposing||showEmail||!isMobile">
                 <transition name="slide-fade">
                     <!--<map-canvas v-if="!isComposing" @showItem="showItem" :Item="selectedItem" :center="locations[0].coords" :locations="locations" :selectedItem="this.selectedItem">-->
-                    <map-canvas v-if="!isComposing" @showItem="showItem"  :center="locations[0].coords" :locations="locations" :selectedItem="this.selectedItem">
+                    <map-canvas v-if="!isComposing&&locations" @showItem="showItem"  :center="this.locations[0].coords" :locations="locations" :selectedItem="selectedItem">
                     </map-canvas>
                 </transition>
                 <transition name="slide-fade">
@@ -54,7 +54,8 @@ export default {
             isMobile: false,
             windowWidth: 0,
             nextItem: false,
-            showItem: false
+            showItem: false,
+            showEmail: false
 
         }
     },
@@ -71,14 +72,15 @@ export default {
         passingSelectedItem(itemToSelect) {
             this.isComposing = false;
             this.nextItem = !this.nextItem;
-            if (this.selectedItem = itemToSelect) this.selectedItem = null;
+            if (this.selectedItem === itemToSelect) this.selectedItem = null;
             else this.selectedItem = itemToSelect;
             console.log('mapp-app recived event - item to select:', itemToSelect, this.selectedItem)
         },
-        ItemDelete(itemToDelete) {
+        itemDelete(itemToDelete) {
             mapService.deleteLocation(itemToDelete);
             this.passingSelectedItem();
             emailService.getLocations().then(locations => {
+                console.log('Local', locations)
                 this.selectedLocation = locations[0]
             })
         },

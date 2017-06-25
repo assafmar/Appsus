@@ -44,7 +44,7 @@ export default {
     },
 
     methods: {
-        save() {
+        send() {
             this.getDataToSave();
             this.$emit('save', this.itemData);
             this.clear()
