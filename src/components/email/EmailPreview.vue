@@ -60,7 +60,7 @@ export default {
 font-size: 1em;    
 }
 .email-date{
-font-size: 0.5em;    
+font-size: 0.5em;   
 }
 .email-subject{
 font-size: 1em;    

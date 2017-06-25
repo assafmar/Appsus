@@ -5,10 +5,11 @@ import moment from 'moment'
 import App from './App'
 import router from './router'
 import ElementUI from 'element-ui'
-import GoogleMapsLoader from 'google-maps'
 import locale from 'element-ui/lib/locale/lang/en'
 import * as VueGoogleMaps from 'vue2-google-maps';
+import axios from 'axios';
 
+Vue.use(axios)
 Vue.use(VueGoogleMaps, {
     load: {
       key: 'AIzaSyBriaPD72cENJFp8ezr9wJJ-l2VSHua3VA',

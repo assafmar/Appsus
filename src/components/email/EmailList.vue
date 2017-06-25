@@ -24,7 +24,6 @@ import emailService from '../../services/email/email.service';
 
 export default {
   name: 'EmailList',
-
   components: {
     EmailPreview,
     EmailSearch,
@@ -34,11 +33,17 @@ export default {
       console.log('promise returned to List', this.mails)
       this.emails = mails
       this.$emit('defaultEmail', this.emails[0])
-      this.emailsToShow('inbox')
+      this.emailsToShow()
       console.log('after', this.emails)
     });
 
   },
+  watch:{
+           currEmail:function(){
+             
+               this.emailsToShow()}
+           
+    },
   data() {
     return {
       emails: null,
@@ -99,8 +104,7 @@ export default {
       console.log(tab._props.label);
     },
     emailsToShow(key) {
-      console.log('Enter in to loop', key)
-      var emailsToShow;
+      var emailsToShow = this.emails;
       if (key === 'inbox') {
         emailsToShow = this.emails.filter(email => {
           console.log('inLoop', email.category.inbox)

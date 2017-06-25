@@ -6,7 +6,7 @@
         @selectedEmail="passingSelectedMail"
         @startComposing="showDetails"
         @showEmail="showMail"
-        :isMobile="isMobile">
+        :newEmails="newEmails">
     </email-list>
     </transition>
     <transition name="slide-fade">
@@ -69,7 +69,7 @@ export default {
         isMobile: false,
         windowWidth: 0,
         nextMail: false,
-        showEmail: false
+        showEmail: false,
 
     }
   },
