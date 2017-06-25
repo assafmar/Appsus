@@ -138,7 +138,7 @@ export default {
     }
 
 .cont {
-    width: 60%;
+    width: 67%;
     display: block;
     height: 100vh;
 }

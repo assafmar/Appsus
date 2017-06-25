@@ -34,19 +34,17 @@ export default {
 
 <style lang="">
 .email-preview {
-    background: #D3DCE6;
-    /*height: 80px;*/
-    border-radius: 3px;
-    /*width: 100%;*/
-    margin-bottom: 1px;
-    display: flex;
-    flex-direction:column;
-    padding: 0px 10px;
-     border-radius: 3px;
-    cursor: pointer;
-    box-shadow: 4px 0px 7px -1px rgba(173,171,173,1);
-    transition: all .3s;
-     box-sizing: border-box;
+        background: #D3DCE6;
+        border-radius: 3px;
+        margin-bottom: 1px;
+        display: flex;
+        flex-direction:column;
+        padding: 0px 10px;
+        border-radius: 3px;
+        cursor: pointer;
+        box-shadow: 4px 0px 7px -1px rgba(173,171,173,1);
+        transition: all .3s;
+        box-sizing: border-box;
 
 }
 

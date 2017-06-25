@@ -7,6 +7,15 @@ import router from './router'
 import ElementUI from 'element-ui'
 import GoogleMapsLoader from 'google-maps'
 import locale from 'element-ui/lib/locale/lang/en'
+import * as VueGoogleMaps from 'vue2-google-maps';
+
+Vue.use(VueGoogleMaps, {
+    load: {
+      key: 'AIzaSyBriaPD72cENJFp8ezr9wJJ-l2VSHua3VA',
+      // v: 'OPTIONAL VERSION NUMBER',
+      // libraries: 'places', //// If you need to use place input 
+    }
+  });
 
 
 

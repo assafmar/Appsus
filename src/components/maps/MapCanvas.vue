@@ -1,6 +1,20 @@
 <template>  
 <section class="map-canvas">
-<div id="map"></div>
+
+<gmap-map
+    :center="center"
+    :zoom="14"
+    style="width: 100%; height: 100%"
+  >
+    <gmap-marker
+      :key="index"
+      v-for="(m, index) in markers"
+      :position="m.position"
+      :clickable="true"
+      :draggable="true"
+      @click="center=m.position"
+    ></gmap-marker>
+  </gmap-map>
 
 
 
@@ -12,7 +26,7 @@
 
 
 <script>
-import GoogleMapsLoader from 'google-maps';
+// import GoogleMapsLoader from 'google-maps';
 var map;
 var google;
 
@@ -41,17 +55,25 @@ var google;
         },
         data(){
             return{
-               myOptions: {center: {lat: 32.0684, lng: 34.8248},zoom: 17},
-               places: {position: {lat: 32.0684, lng: 34.8248},map:map,},
+            //    myOptions: {center: {lat: 32.0684, lng: 34.8248},zoom: 17},
+            //    places: {position: {lat: 32.0684, lng: 34.8248},map:map,},
+                center: {lat: 32.0684, lng: 34.8248},
+
+
+        markers: [{
+          position: {lat: 32.0684, lng: 34.8248} //marker
+        }, {
+          position: {lat: 32.0659, lng: 34.8291}
+        }]
             }
         },
-        beforeDestroy(){
-            GoogleMapsLoader.release()
+        // beforeDestroy(){
+        //     GoogleMapsLoader.release()
             
-        },
-       updated(){
-           GoogleMapsLoader.load(this.mapLoad)
-       }
+        // },
+    //    updated(){
+    //        GoogleMapsLoader.load(this.mapLoad)
+    //    }
 
 
 
