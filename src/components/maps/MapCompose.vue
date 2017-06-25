@@ -20,7 +20,7 @@
         <br/>
         <el-button-group class="compose-buttons">
             <el-button class="compose-button" @click="cancel" type="warning"> Cancel</el-button>
-            <el-button class="compose-button" @click="send" type="success">Save</el-button>
+            <el-button class="compose-button" @click="save" type="success">Save</el-button>
         </el-button-group>
     
     </section>
@@ -37,7 +37,8 @@ export default {
             lat: undefined,
             lng: undefined,
             address: '',
-            description: ''
+            description: '',
+            itemData:{}
 
 
         }
@@ -47,7 +48,8 @@ export default {
         save() {
             this.getDataToSave();
             this.$emit('save', this.itemData);
-            this.clear()
+            console.log('map compose - saving item (emit);',this.itemData)
+            this.clear();
         },
         cancel() {
             this.$emit('cancel');

@@ -1,9 +1,10 @@
 <template>
     <section class="map-preview" @click.stop="seeDetails">
         <div class="preview-title">
-            <div class="location-from">From: {{location.name}}</div>
-            <div class="location-date">{{location.category}}</div>
+            <div class="location-from">{{location.name}}</div>
+            <el-button class="close-button" @click.stop="deleteItem" icon="close"></el-button> 
         </div>
+            <div class="location-date">{{location.category}}</div>
         <p class="location-subject">{{location.address}}</p>
     
     </section>
@@ -17,6 +18,9 @@ export default {
         seeDetails() {
             this.$emit('selectedItem',this.location);
             this.$emit('showLocation');
+        },        
+        deleteItem() {
+            this.$emit('deleteItem',this.location);
         },
     },
     data() {
@@ -32,7 +36,7 @@ export default {
 
 
 
-<style lang="">
+<style scoped>
 .map-preview {
     background: #D3DCE6;
     /*height: 80px;*/
@@ -58,11 +62,22 @@ export default {
     flex-wrap: wrap;
 }
 
+.close-button{
+    background-color: transparent;
+    border:none;
+    padding:0px;
+    color: #999999;
+    
+}
+.el-button:focus, .el-button:hover {
+    color: #666666;
+}
+
 .location-from{
 font-size: 1em;    
 }
 .location-date{
-font-size: 0.5em;    
+font-size: 0.7em;    
 }
 .location-subject{
 font-size: 1em;    

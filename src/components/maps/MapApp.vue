@@ -9,11 +9,11 @@
             <div class="cont" v-if="isComposing||showEmail||!isMobile">
                 <transition name="slide-fade">
                     <!--<map-canvas v-if="!isComposing" @showItem="showItem" :Item="selectedItem" :center="locations[0].coords" :locations="locations" :selectedItem="this.selectedItem">-->
-                    <map-canvas v-if="!isComposing" @showItem="showItem"  :center="locations[0].coords" :locations="locations" :selectedItem="this.selectedItem">
+                    <map-canvas v-if="!isComposing" @showItem="showItem" :center="locations[0].coords" :locations="locations" :selectedItem="this.selectedItem">
                     </map-canvas>
                 </transition>
                 <transition name="slide-fade">
-                    <map-compose v-show="isComposing" @cancel="showItem" @save="saveItem">
+                    <map-compose v-show="isComposing" @cancel="showDetails" @save="saveItem">
                     </map-compose>
                 </transition>
             </div>
@@ -61,6 +61,7 @@ export default {
     methods: {
 
         saveItem(itemToSave) {
+            console.log('map app - saving new location', itemToSave);
             mapService.saveLocation(itemToSave);
             this.showDetails();
         },
@@ -76,6 +77,7 @@ export default {
             console.log('mapp-app recived event - item to select:', itemToSelect, this.selectedItem)
         },
         ItemDelete(itemToDelete) {
+            console.log('map app - recived request to delete item:',itemToDelete);
             mapService.deleteLocation(itemToDelete);
             this.passingSelectedItem();
             emailService.getLocations().then(locations => {

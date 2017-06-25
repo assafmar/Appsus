@@ -1,12 +1,12 @@
 
 <template>
-  <section v-if="locations" class="item-list">
-    <el-button class="list-compose" @click="startComposing" type="primary" icon="edit">Add New</el-button>
-    <!--<Location-search @searchQueryB="setQuery" @radioSelectB="setRadio"></Location-search>-->
-  
-    <map-preview @selectedItem="passingSelectedItem" v-for="currLocation in locations" :key="currLocation.id" :location="currLocation" ></map-preview>
-  
-  </section>
+    <section v-if="locations" class="item-list">
+        <el-button class="list-compose" @click="startComposing" type="primary" icon="edit">Add New</el-button>
+        <!--<Location-search @searchQueryB="setQuery" @radioSelectB="setRadio"></Location-search>-->
+    
+        <map-preview @selectedItem="passingSelectedItem" @deleteItem="passingDeletedItem" v-for="currLocation in locations" :key="currLocation.id" :location="currLocation"></map-preview>
+    
+    </section>
 </template>
 
 
@@ -16,42 +16,47 @@ import MapPreview from './MapPreview.vue';
 import mapService from '../../services/maps/map.service';
 
 export default {
-  name: 'map-list',
-  components: {
-    MapPreview
-  },
-  created() {
-    mapService.getLocations().then(locations => {
-      console.log('promise returned to List', this.locations)
-      this.locations = locations
-      this.$emit('defaultLocation', this.locations[0])
-      console.log('after', this.locations)
-    });
-
-  },
-  data() {
-    return {
-      locations: null,
-      selectedItem: null,
-      isCreateMode: false,
-    }
-  },
-
-  computed: {
- 
-  },
-
-  methods: {
-    passingSelectedItem(ItemToSelect) {
-      this.$emit('selectedItem', ItemToSelect);
+    name: 'map-list',
+    components: {
+        MapPreview
     },
-    startComposing() {
-      this.$emit('startComposing');
+    created() {
+        mapService.getLocations().then(locations => {
+            console.log('promise returned to List', this.locations)
+            this.locations = locations
+            this.$emit('defaultLocation', this.locations[0])
+            console.log('after', this.locations)
+        });
+
     },
-    showLocation() {
-      this.$emit('showLocation')
+    data() {
+        return {
+            locations: null,
+            selectedItem: null,
+            isCreateMode: false,
+        }
+    },
+
+    computed: {
+
+    },
+
+    methods: {
+        passingSelectedItem(ItemToSelect) {
+            this.$emit('selectedItem', ItemToSelect);
+        },
+        startComposing() {
+            this.$emit('startComposing');
+        },
+        passingDeletedItem(itemToDelete) {
+            this.$emit('deleteItem');
+            console.log('map list - passing item to delete:', itemToDelete)
+        },
+
+        showLocation() {
+            this.$emit('showLocation')
+        }
     }
-  }
 }
 
 </script>
@@ -60,7 +65,6 @@ export default {
 
 
 <style lang="">
-
 .item-list {
     box-sizing: border-box;
     width: 33%;
@@ -68,29 +72,28 @@ export default {
     background: #eef1f6;
     padding: 0 10px 0 5px;
     transition: all .5s;
-  }
+}
 
-  .list-compose {
+.list-compose {
     width: 100%;
     margin: 5px 0;
     box-shadow: 4px 0px 11px -1px rgba(173, 171, 173, 1);
-  }
+}
 
-  .is-not-read {
+.is-not-read {
     font-weight: bold;
-  }
- 
+}
+
 
 .el-tabs__content {
-  overflow: visible !important;
+    overflow: visible !important;
 }
 
 @media (max-width: 711px) {
-  .item-list {
-    width: 100%;
-    height: 100%;
-  }
+    .item-list {
+        width: 100%;
+        height: 100%;
+    }
 }
-
 </style>
 
