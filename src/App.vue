@@ -8,7 +8,9 @@
 </el-badge>
     </el-menu-item>
     <el-menu-item index="/map">Maps</el-menu-item>
+    <el-menu-item index="/book">Books</el-menu-item>
 </el-menu>
+
 
 <transition name="fade">
     <router-view @unreadMails="updateCount"></router-view>
@@ -24,6 +26,7 @@ export default {
     return{
          activeIndex: '/',
          activeIndex2: '/map',
+         activeIndex2: '/book',
          unreadEmails: 0
     }
   },
