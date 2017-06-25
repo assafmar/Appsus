@@ -15,7 +15,7 @@ export default {
     props: ['location'],
     methods: {
         seeDetails() {
-            this.$emit('selectedLocation',this.location);
+            this.$emit('selectedItem',this.location);
             this.$emit('showLocation');
         },
     },

@@ -8,7 +8,8 @@
         <transition name="slide-fade">
             <div class="cont" v-if="isComposing||showEmail||!isMobile">
                 <transition name="slide-fade">
-                    <map-canvas v-if="!isComposing" @showItem="showItem" :Item="selectedItem" :locations="locations" :center="locations[0].coords">
+                    <!--<map-canvas v-if="!isComposing" @showItem="showItem" :Item="selectedItem" :center="locations[0].coords" :locations="locations" :selectedItem="this.selectedItem">-->
+                    <map-canvas v-if="!isComposing" @showItem="showItem"  :center="locations[0].coords" :locations="locations" :selectedItem="this.selectedItem">
                     </map-canvas>
                 </transition>
                 <transition name="slide-fade">
@@ -37,18 +38,17 @@ export default {
         MapCompose,
     },
     created() {
-    this.getWindowWidth()
-    mapService.getLocations().then(locations => {
-      console.log('promise returned to APP', this.locations)
-      this.locations = locations
-      console.log('after', this.locations)
-    });
-
+        this.getWindowWidth()
+        mapService.getLocations().then(locations => {
+            console.log('promise returned to List', this.locations)
+            this.locations = locations
+            console.log('after', this.locations)
+        });
     },
     data() {
         return {
-              locations: null,
-           isComposing: false,
+            locations: null,
+            isComposing: false,
             itemToSend: null,
             selectedItem: null,
             isMobile: false,
@@ -71,7 +71,9 @@ export default {
         passingSelectedItem(itemToSelect) {
             this.isComposing = false;
             this.nextItem = !this.nextItem;
-            this.selectedItem = itemToSelect;
+            if (this.selectedItem = itemToSelect) this.selectedItem = null;
+            else this.selectedItem = itemToSelect;
+            console.log('mapp-app recived event - item to select:', itemToSelect, this.selectedItem)
         },
         ItemDelete(itemToDelete) {
             mapService.deleteLocation(itemToDelete);
@@ -138,11 +140,11 @@ export default {
     opacity: 0;
 }
 
-    .item-list {
-        /*width: 33%;*/
-        /*display: block;
+.item-list {
+    /*width: 33%;*/
+    /*display: block;
         height: 100vh;*/
-    }
+}
 
 .cont {
     width: 67%;
@@ -163,11 +165,6 @@ export default {
         width: 100%;
     }
 }
-
-
-
-
-
 </style>
 
 

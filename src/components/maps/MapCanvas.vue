@@ -1,19 +1,23 @@
 <template>  
-<section class="map-canvas">
+<section class="map-canvas" v-if="this.locations">
 
 <gmap-map
     :center="center"
     :zoom="14"
     style="width: 100%; height: 100%"
   >
+
     <gmap-marker
       :key="index"
-      v-for="(m, index) in markers"
-      :position="m.position"
+      v-for="(m, index) in locations"
+      :position="m.coords"
       :clickable="true"
       :draggable="true"
-      @click="center=m.position"
-    ></gmap-marker>
+      @click="center=m.coords"
+    >
+    </gmap-marker>
+
+
   </gmap-map>
 
 
@@ -26,54 +30,38 @@
 
 
 <script>
-// import GoogleMapsLoader from 'google-maps';
-var map;
-var google;
-
     export default {
        name: 'MapApp',
-       props: ['options'],
+       props: ['locations','center'],
         created(){
-            GoogleMapsLoader.KEY = 'AIzaSyBriaPD72cENJFp8ezr9wJJ-l2VSHua3VA',
-            GoogleMapsLoader.load(this.mapLoad)
-            this.mapMarker(this.places)
+            console.log(this.locations, 'Bbbbbbbbbbbbbbb')
+            this.center = center
+            this.locations = locations
+          
+        },
+        mounted(){
+             this.center = this.locations[0].coords
         },
         methods:{
-            mapLoad(google){
-            map = new google.maps.Map(document.getElementById('map'),this.myOptions)
-            // new google.maps.Marker({position: {lat: 32.0684, lng: 34.8248}, map:map,})
-            console.log(google)
-            },
-            mapMarker(places){
-                GoogleMapsLoader.load(function(google) {
-                google = google
-                new google.maps.Marker({position: {lat: places.position.lat, lng: places.position.lng}, map:map,});});
-            },
+            
             addInfo(){
 
             }
         },
         data(){
             return{
-            //    myOptions: {center: {lat: 32.0684, lng: 34.8248},zoom: 17},
-            //    places: {position: {lat: 32.0684, lng: 34.8248},map:map,},
-                center: {lat: 32.0684, lng: 34.8248},
-
-
-        markers: [{
-          position: {lat: 32.0684, lng: 34.8248} //marker
-        }, {
-          position: {lat: 32.0659, lng: 34.8291}
-        }]
+            locations: null,
+            center: null,
+              
             }
         },
-        // beforeDestroy(){
-        //     GoogleMapsLoader.release()
+        beforeDestroy(){
             
-        // },
-    //    updated(){
-    //        GoogleMapsLoader.load(this.mapLoad)
-    //    }
+            
+        },
+       updated(){
+          
+       }
 
 
 

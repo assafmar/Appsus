@@ -4,7 +4,7 @@
     <el-button class="list-compose" @click="startComposing" type="primary" icon="edit">Add New</el-button>
     <!--<Location-search @searchQueryB="setQuery" @radioSelectB="setRadio"></Location-search>-->
   
-    <map-preview @selectedLocation="passingSelectedLocation" v-for="currLocation in locations" :key="currLocation.id" :location="currLocation" ></map-preview>
+    <map-preview @selectedItem="passingSelectedItem" v-for="currLocation in locations" :key="currLocation.id" :location="currLocation" ></map-preview>
   
   </section>
 </template>
@@ -32,7 +32,7 @@ export default {
   data() {
     return {
       locations: null,
-      selectedLocation: null,
+      selectedItem: null,
       isCreateMode: false,
     }
   },
@@ -42,8 +42,8 @@ export default {
   },
 
   methods: {
-    passingSelectedLocation(locationToSelect) {
-      this.$emit('selectedLocation', locationToSelect);
+    passingSelectedItem(ItemToSelect) {
+      this.$emit('selectedItem', ItemToSelect);
     },
     startComposing() {
       this.$emit('startComposing');

@@ -52,7 +52,7 @@ export default {
   },
 
   computed: {
-    emailsToDisplay(emailsToShow) {
+    emailsToDisplay() {
       var emails = this.currEmails;
       if (this.radioSelect !== 'All') {
         console.log('filtering only unread emails')
@@ -94,6 +94,7 @@ export default {
     },
 
     handleClick(tab, event) {//tabs
+    this.key = tab._props.labe;
       this.emailsToShow(tab._props.label)
       console.log(tab._props.label);
     },
@@ -113,7 +114,7 @@ export default {
       }
       console.log('end loop', emailsToShow)
       this.currEmails = emailsToShow;
-      console.log(this.currEmails)
+      // console.log(this.currEmails)
 
     },
     showEmail() {
