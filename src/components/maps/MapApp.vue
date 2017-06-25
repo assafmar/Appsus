@@ -8,7 +8,7 @@
         <transition name="slide-fade">
             <div class="cont" v-if="isComposing||showEmail||!isMobile">
                 <transition name="slide-fade">
-                    <map-canvas v-if="!isComposing" @showItem="showItem" :Item="selectedItem">
+                    <map-canvas v-if="!isComposing" @showItem="showItem" :Item="selectedItem" :center="locations[0].coords" :locations="locations">
                     </map-canvas>
                 </transition>
                 <transition name="slide-fade">
@@ -38,6 +38,11 @@ export default {
     },
     created() {
         this.getWindowWidth()
+        mapService.getLocations().then(locations => {
+      console.log('promise returned to List', this.locations)
+      this.locations = locations
+      console.log('after', this.locations)
+    });
     },
     data() {
         return {
@@ -47,7 +52,8 @@ export default {
             isMobile: false,
             windowWidth: 0,
             nextItem: false,
-            showItem: false
+            showItem: false,
+            locations: null
 
         }
     },
