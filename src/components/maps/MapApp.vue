@@ -9,7 +9,7 @@
             <div class="cont" v-if="isComposing||showEmail||!isMobile">
                 <transition name="slide-fade">
                     <!--<map-canvas v-if="!isComposing" @showItem="showItem" :Item="selectedItem" :center="locations[0].coords" :locations="locations" :selectedItem="this.selectedItem">-->
-                    <map-canvas v-if="!isComposing&&locations" @showItem="showItem"  :center="this.locations[0].coords" :locations="locations" :selectedItem="selectedItem">
+                    <map-canvas v-if="!isComposing&&locations" @showItem="showItem"  :center="this.center" :locations="locations" :selectedItem="selectedItem">
                     </map-canvas>
                 </transition>
                 <transition name="slide-fade">
@@ -43,10 +43,13 @@ export default {
             console.log('promise returned to List', this.locations)
             this.locations = locations
             console.log('after', this.locations)
+            this.center = locations[0].coords
+            
         });
     },
     data() {
         return {
+            center: null,
             locations: null,
             isComposing: false,
             itemToSend: null,
@@ -82,6 +85,8 @@ export default {
             mapService.deleteLocation(itemToDelete);
             // this.passingSelectedItem();
             this.selectedItem = null;
+            this.center=(this.locations[0])?this.locations[0].coords:{lat:32.0872919, lng:34.8027026}
+            console.log(this.locations[0],this.center,'!!!!!!!!!!!!')
             // mapService.getLocations().then(locations => {
             //     console.log('Local', locations)
             //     this.selectedItem = locations[0]

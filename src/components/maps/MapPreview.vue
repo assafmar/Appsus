@@ -20,7 +20,8 @@ export default {
             this.$emit('showLocation');
         },        
         deleteItem() {
-            this.$emit('deleteItem',this.location);
+            this.$emit('deleteItemFromPreview',this.location);
+            console.log('First click to delete', this.location)
         },
     },
     data() {

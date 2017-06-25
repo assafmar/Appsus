@@ -4,7 +4,7 @@
         <el-button class="list-compose" @click="startComposing" type="primary" icon="edit">Add New</el-button>
         <!--<Location-search @searchQueryB="setQuery" @radioSelectB="setRadio"></Location-search>-->
     
-        <map-preview @selectedItem="passingSelectedItem" @deleteItem="passingDeletedItem" v-for="currLocation in locations" :key="currLocation.id" :location="currLocation"></map-preview>
+        <map-preview @selectedItem="passingSelectedItem" @deleteItemFromPreview="passingDeletedItem" v-for="currLocation in locations" :key="currLocation.id" :location="currLocation"></map-preview>
     
     </section>
 </template>
@@ -49,7 +49,7 @@ export default {
             this.$emit('startComposing');
         },
         passingDeletedItem(itemToDelete) {
-            this.$emit('deleteItem');
+            this.$emit('deleteItem', itemToDelete);
             console.log('map list - passing item to delete:', itemToDelete)
         },
 

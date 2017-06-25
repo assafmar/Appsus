@@ -53,7 +53,7 @@ function saveLocation(location){
     var locationWithControls = location;
     locationWithControls.id=getUniqueId();;
     locationWithControls.date = Date.now();
-    locations.unshift(locationWithControls);
+    locations.push(locationWithControls);
     console.log('Location - saved');
   }
 

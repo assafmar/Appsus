@@ -2,9 +2,10 @@
 <section class="map-canvas" v-if="this.locations">
 
 <gmap-map
-    :center="center"
+    :center="currCenter"
     :zoom="14"
     style="width: 100%; height: 100%"
+   
   >
   <gmap-info-window 
     :options="infoOptions" 
@@ -21,7 +22,7 @@
       :draggable="false"
       :infoText="m.description"
       @click="toggleInfoWindow(m, index)"
-      @dblclick="center=m.coords"
+      @dblclick="currCenter=m.coords"
     >
     </gmap-marker>
   </gmap-map>
@@ -31,15 +32,24 @@
 
 <script>
     export default {
-       name: 'MapApp',
+       name: 'MapCanvas',
        props: ['locations','center', 'selectedItem'],
         created(){
-          
+            // console.log(this.locations,this.center,this.selectedItem)
+            this.currCenter = this.center
         },
        watch:{
            selectedItem:function () {
-                this.toggleInfoWindow(this.selectedItem)
+               if(this.selectedItem){
+                this.toggleInfoWindow(this.selectedItem)}
+                else{
+                    this.infoWinOpen=false;
+                }
     },
+        currCenter:function (){
+            if(!this.currCenter)this.currCenter={lat:32.0872919, lng:34.8027026}
+        }
+
        },
         methods:{
             toggleInfoWindow(marker, idx) {
@@ -59,6 +69,7 @@
         },
         data(){
             return{
+            currCenter:{lat:32.0872919, lng:34.8027026},
             infoContent: '',
             infoWindowPos: {
                 lat: 0,
