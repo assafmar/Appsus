@@ -4,13 +4,13 @@
     <email-search @searchQueryB="setQuery" @radioSelectB="setRadio"></email-search>
     <el-tabs type="card" @tab-click="handleClick">
       <el-tab-pane label="inbox" value="1">
-    <email-preview @selectedEmail="passingSelectedMail" v-for="currEmail in emailsToDisplay" :key="currEmail.id" :email="currEmail" :class="{ 'is-not-read': !currEmail.isRead }"></email-preview>
         <!--<email-preview @selectedEmail="passingSelectedMail" @showEmail="showEmail" v-for="currEmail in emailsToDisplay" :key="currEmail.id" :email="currEmail">-->
         </email-preview>
       </el-tab-pane>
       <el-tab-pane label="sent" value="2">
       </el-tab-pane>
     </el-tabs>
+    <email-preview @selectedEmail="passingSelectedMail" @showEmail="showEmail" v-for="currEmail in emailsToDisplay" :key="currEmail.id" :email="currEmail" :class="{ 'is-not-read': !currEmail.isRead }"></email-preview>
 
   </section>
 </template>
@@ -34,6 +34,7 @@ export default {
       console.log('promise returned to List', this.mails)
       this.emails = mails
       this.$emit('defaultEmail', this.emails[0])
+      this.emailsToShow('inbox')
       console.log('after', this.emails)
     });
 
@@ -45,16 +46,17 @@ export default {
       isCreateMode: false,
       searchQuery: '',
       radioSelect: 'All',
-      key: null
+      key: null,
+      currEmails: null
     }
   },
 
   computed: {
-    emailsToDisplay() {
-      var emails = this.emails;
+    emailsToDisplay(emailsToShow) {
+      var emails = this.currEmails;
       if (this.radioSelect !== 'All') {
         console.log('filtering only unread emails')
-        emails = this.emails.filter(email => {
+        emails = emails.filter(email => {
           var isRead = email.isRead;
           var result = (isRead === false);
           return (result)
@@ -69,7 +71,8 @@ export default {
         })
       }
       return emails;
-    }
+    },
+    
   },
 
   methods: {
@@ -104,12 +107,13 @@ export default {
         });
       } else if (key === 'sent') {
         emailsToShow = this.emails.filter(email => {
-          console.log('inLoop', email.category.key)
-          return email.category.key;
+          console.log('inLoop', email.category.sent)
+          return email.category.sent;
         });
       }
       console.log('end loop', emailsToShow)
-      // this.emails = emailsToShow;
+      this.currEmails = emailsToShow;
+      console.log(this.currEmails)
 
     },
     showEmail() {
@@ -150,7 +154,7 @@ export default {
   overflow: visible !important;
 }
 
-@media (max-width: 711px) {
+@media (max-width: 720px) {
   .email-list {
     width: 100%;
     height: 100%;

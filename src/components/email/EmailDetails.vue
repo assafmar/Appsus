@@ -6,12 +6,12 @@
     <div class="details-header">
         <div class="details-from">{{email.from}}</div>
         <div class="details-date">{{moment(email.date).format('lll')}}</div>
+        </div>
         <div class="details-content">
         <div class="details-subject"><h2>{{email.subject}}</h2></div>
         <div class="details-text">{{email.text}}</div>
-        </div>
         <div class="details-buttons">
-            <el-button class="details-button" @click="isReadToggle(false)" v-show="email.isRead" type="primary" icon="check" size="large"></el-button>
+            <el-button class="details-button" @click="isReadToggle(false)" v-show="email.isRead" type="primary" icon="document" size="large"></el-button>
             <el-button class="details-button" @click="isReadToggle(true)" v-show="!email.isRead" type="primary" icon="message" size="large"></el-button>
             <el-button class="details-button" @click="emailDelete()" type="danger" icon="delete" size="large"></el-button>
         </div>
@@ -30,13 +30,13 @@ export default {
     name: 'email-details',
     props: ['email'],
      created() {
-            console.log('create - make it isRead - before',this.email.isRead) 
+            // console.log('create - make it isRead - before',this.email.isRead) 
             this.$emit('isReadChange', true, this.email)
-             console.log('create - make it isRead - after',this.email.isRead) 
+            //  console.log('create - make it isRead - after',this.email.isRead) 
     },
     methods: {
         isReadToggle(val) {
-            console.log(this.email,val,'before')
+            // console.log(this.email,val,'before')
             this.$emit('isReadChange', val, this.email)
             // this.email.isRead = !this.email.isRead;
             console.log(this.email,val,'after')
@@ -73,7 +73,7 @@ export default {
     box-shadow: 0px 0px 5px 0px rgba(173,171,173,1);
 }
 .details-header{
-    padding: 10% 5%;
+    padding: 10% 5% 5% 5%;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
@@ -82,11 +82,19 @@ export default {
     font-weight: 900;
 }
 .details-content{
-    padding: 5%;
-    font-weight: 400;
+    padding: 0 5% 5% 5%;
+    font-family: monospace;
+    font-weight: 900;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+.details-subject{
+    width:100%;
 }
 
 .details-buttons{
+    margin: 20px 0 0 0;
     width:100%;
     display: flex;
     flex-flow: row wrap;

@@ -25,7 +25,7 @@ import { Notification } from 'element-ui';
        to: '',
        subject: '',
        text: '',
-       from: 'myself#example.com',
+       from: 'myself@example.com',
        mail: null
     }
   },

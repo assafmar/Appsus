@@ -54,8 +54,10 @@ console.log('typed in to search');
 
 <style>
 .email-search {
-    background: #BBBBBB;
+    background: #D3DCE6;
     /*height: 80px;*/
+    box-shadow: 4px 0px 7px -1px rgba(173,171,173,1);
+    border-radius: 3px;
     margin-bottom: 1px;
 }
 
@@ -63,7 +65,7 @@ console.log('typed in to search');
     padding: 5px;
 }
 
-.search {}
+
 
 .search-title {
     font-size: 1em;
@@ -72,7 +74,7 @@ console.log('typed in to search');
     margin-bottom:0.3em;
 }
 
-.el-input {
+.search {
     width: 100%;
 }
 
@@ -87,8 +89,8 @@ console.log('typed in to search');
 
 .el-radio-button__orig-radio:checked+.el-radio-button__inner {
     color: #fff;
-    background-color: #777777;
-    border-color: #777777;
+    background-color: #8492A6;
+    border-color: #8492A6;
     box-shadow: -1px 0 0 0 #20a0ff;
 }
 

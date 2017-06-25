@@ -68,9 +68,11 @@ function getUniqueId(){
 }  
 
 function changeEmailIsRead(email,value){
+  if(email){
  console.log('Changing email isRead to:', value)
   var idx = emails.indexOf(email)
   emails[idx].isRead=value;
+  }
 }
 
 function changeEmailCategory(email,key,value){ // {inbox:true, sent:true}

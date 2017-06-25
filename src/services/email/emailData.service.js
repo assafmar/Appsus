@@ -9,7 +9,7 @@ const emails = [
     {date: Date.now(), id: 3, from: 'eaba@example.com', to: 'tuki@example.com', isRead: false, subject: 'hello e!', text: emailText, flag: '', category: {sent:true,inbox:true}},
     {date: Date.now(), id: 4, from: 'faba@example.com', to: 'tuki@example.com', isRead: false, subject: 'hello f!', text: emailText, flag: '', category: {sent:false,inbox:true}},
     {date: Date.now(), id: 5, from: 'gaba@example.com', to: 'tuki@example.com', isRead: false, subject: 'hello g!', text: emailText, flag: '', category: {sent:false,inbox:true}},
-    {date: Date.now(), id: 6, from: 'haba@example.com', to: 'tuki@example.com', isRead: false, subject: 'hello h!', text: emailText, flag: '', category: {sent:false,inbox:true}},
+    {date: Date.now(), id: 6, from: 'haba@example.com', to: 'tuki@example.com', isRead: false, subject: 'hello h!', text: emailText, flag: '', category: {sent:true,inbox:true}},
     {date: Date.now(), id: 7, from: 'iaba@example.com', to: 'tuki@example.com', isRead: false, subject: 'hello i!', text: emailText, flag: '', category: {sent:false,inbox:true}},   
 ]
 

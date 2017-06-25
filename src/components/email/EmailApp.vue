@@ -161,7 +161,7 @@ transition: all .5s;
 }
 
 .cont{
-    width: 100%;
+    width: 67%;
     display: block;
    height: 100vh;
 }
@@ -171,7 +171,13 @@ transition: all .5s;
     display: block;
     height: 100vh;
   }
-
+  .email-app{
+      display:block;
+      height: 100vh;
+  }
+  .cont{
+    width: 100%;
+  }
 }
 
 
